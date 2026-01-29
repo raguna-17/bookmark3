@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Bookmarks</title>
+</head>
+
+<body>
+    <h2>My Bookmarks</h2>
+
+    <h3>Add / Update Bookmark</h3>
+    <form method="post">
+        {% csrf_token %}
+        <input type="hidden" name="bookmark_id" value="">
+        <input type="text" name="title" placeholder="Title" required>
+        <input type="url" name="url" placeholder="URL" required>
+        <input type="text" name="description" placeholder="Description">
+        <input type="text" name="tags" placeholder="Tags (comma separated)">
+        <button type="submit">Save</button>
+    </form>
+
+    <ul>
+        {% for bm in bookmarks %}
+        <li>
+            <a href="{{ bm.url }}" target="_blank">{{ bm.title }}</a> - {{ bm.description }}
+            {% if bm.tags.all %}
+            [Tags:
+            {% for tag in bm.tags.all %}
+            {{ tag.name }}{% if not forloop.last %}, {% endif %}
+            {% endfor %}
+            ]
+            {% endif %}
+            [<a href="?delete={{ bm.id }}">Delete</a>]
+        </li>
+        {% empty %}
+        <li>No bookmarks yet.</li>
+        {% endfor %}
+    </ul>
+
+    <form method="post" action="{% url 'logout' %}">
+        {% csrf_token %}
+    <button type="submit">Logout</button>
+</body>
+
+</html>

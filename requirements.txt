@@ -1,0 +1,11 @@
+Django>=4.2
+djangorestframework
+djangorestframework-simplejwt
+psycopg2-binary
+dj-database-url
+pytest
+pytest-django
+coverage
+pytest-cov
+whitenoise
+gunicorn
