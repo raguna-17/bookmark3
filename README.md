@@ -91,3 +91,7 @@ Render + Dockerで自動デプロイ
 環境変数で DJANGO_SECRET_KEY / ALLOWED_HOSTS 管理
 
 プッシュ時にテスト通過で自動デプロイ
+
+
+今後の改善予定
+- タグでフィルタ・種類分けができるようにし、Bookmark一覧の閲覧性を向上させる
