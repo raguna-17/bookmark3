@@ -18,29 +18,20 @@ class BookmarkViewSet(viewsets.ModelViewSet):
 def bookmark_list(request):
     user = request.user
 
-    # 新規作成処理
-    if request.method == "POST":
-        title = request.POST.get("title")
-        url = request.POST.get("url")
-        description = request.POST.get("description", "")
-        if title and url:
-            Bookmark.objects.create(user=user, title=title, url=url, description=description)
-        return redirect("bookmark_list")
-
-     # 削除処理
+    # 削除処理
     delete_id = request.GET.get("delete")
     if delete_id:
         bm = get_object_or_404(Bookmark, id=delete_id, user=user)
         bm.delete()
         return redirect("bookmark_list")
 
-    # POST処理：追加 or 更新
+    # 新規作成 or 更新処理
     if request.method == "POST":
         bm_id = request.POST.get("bookmark_id")
         title = request.POST.get("title")
         url = request.POST.get("url")
         description = request.POST.get("description", "")
-        tags_raw = request.POST.get("tags", "")  # カンマ区切りで入力
+        tags_raw = request.POST.get("tags", "")
 
         tag_names = [t.strip() for t in tags_raw.split(",") if t.strip()]
         tag_objs = [Tag.objects.get_or_create(name=name)[0] for name in tag_names]
