@@ -11,9 +11,6 @@ class BookmarkViewSet(viewsets.ModelViewSet):
     permission_classes = [IsAuthenticated]
 
     def perform_create(self, serializer):
-        serializer.save(user=self.request.user)
-
-    def perform_create(self, serializer):
         # Bookmarkを保存
         bookmark = serializer.save(user=self.request.user)
         
