@@ -1,14 +1,18 @@
-ブックマーク管理アプリ
+# ブックマーク管理アプリ
 
+デモサイト:https://bookmark3.onrender.com/
 
-デモサイト: https://bookmark3.onrender.com
+試用アカウント:
 
-ユーザー名: raguna | パスワード: kaibasensei
+ユーザー名: raguna
 
+パスワード: kaibasensei
 
-概要
+### 概要
 
-バックエンド開発力を証明するために設計・構築したブックマーク管理アプリ。主な特徴:
+バックエンド開発力を証明するために設計・構築したブックマーク管理アプリです。
+
+主な特徴:
 
 ユーザーごとのブックマーク管理
 
@@ -22,9 +26,11 @@ JWT認証による安全なAPIアクセス
 
 Renderによる自動デプロイ対応
 
+アプリ画面例:
 
+![alt text](image.png)
 
-技術スタック
+### 技術スタック
 
 バックエンド: Python / Django / Django REST Framework
 
@@ -32,17 +38,15 @@ Renderによる自動デプロイ対応
 
 データベース: SQLite（開発用） / PostgreSQL（本番想定）
 
-テスト: pytest, pytest-django（カバレッジ100%）
+テスト: pytest, pytest-django（モデル・ビュー・APIを網羅、カバレッジ100%）
 
 デプロイ: Docker + Render
 
-静的ファイル: Whitenoise
+静的ファイル: Whitenoise（簡易配信）
 
 フロント: 最小限のHTMLテンプレート（login.html, bookmarks.html）
 
-
-
-主な機能
+### 主な機能
 Web画面（セッション認証）
 
 ログイン / ログアウト
@@ -59,39 +63,34 @@ API（REST / JWT認証）
 
 APIクライアントから認証付きでデータ操作可能
 
-
-
-テスト
+### テスト
 
 モデル・ビュー・APIを網羅
 
 単体テストカバレッジ100%
 
+pytestで自動テスト実行
 
-
-
-特徴・アピールポイント
+### 特徴・アピールポイント
 
 自走力: Docker環境構築 → CI（pytest） → Render自動デプロイまで自力で構築
 
-設計力: CRUD処理の分岐や get_object_or_404 など、セキュリティ・データ整合性を意識した実装
+設計力: CRUD処理の分岐や get_object_or_404 など、セキュリティ・データ整合性を意識
 
 データモデル理解: Bookmark-Tagの多対多関係を正しく活用
 
 テスト駆動: モデル・ビュー・API単体テストを網羅、カバレッジ100%
 
-スピード感: 短期間で機能完成 → 使える状態でリリース可能
+スピード感: 短期間で主要機能完成 → 即運用可能な状態でリリース
 
+### デプロイ
 
+Render上でDockerコンテナを用いた自動デプロイ
 
-デプロイ
-
-Render + Dockerで自動デプロイ
-
-環境変数で DJANGO_SECRET_KEY / ALLOWED_HOSTS 管理
+環境変数で DJANGO_SECRET_KEY / ALLOWED_HOSTS を管理
 
 プッシュ時にテスト通過で自動デプロイ
 
+### 今後の改善予定
 
-今後の改善予定
-- タグでフィルタ・種類分けができるようにし、Bookmark一覧の閲覧性を向上させる
+タグによるフィルタリング機能を追加し、ブックマーク一覧の閲覧性を向上予定
