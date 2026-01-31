@@ -13,6 +13,29 @@ class BookmarkViewSet(viewsets.ModelViewSet):
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)
 
+    def perform_create(self, serializer):
+        # Bookmarkを保存
+        bookmark = serializer.save(user=self.request.user)
+        
+        # タグ文字列を取得
+        tags_input = self.request.data.get('tags', '')
+        tags_list = [t.strip() for t in tags_input.split(',') if t.strip()]
+
+        # 多対多に追加
+        for tag_name in tags_list:
+            tag, created = Tag.objects.get_or_create(name=tag_name)
+            bookmark.tags.add(tag)
+
+    def perform_update(self, serializer):
+        bookmark = serializer.save()
+        # タグ更新も同じ処理
+        bookmark.tags.clear()
+        tags_input = self.request.data.get('tags', '')
+        tags_list = [t.strip() for t in tags_input.split(',') if t.strip()]
+        for tag_name in tags_list:
+            tag, created = Tag.objects.get_or_create(name=tag_name)
+            bookmark.tags.add(tag)
+
 
 @login_required
 def bookmark_list(request):
