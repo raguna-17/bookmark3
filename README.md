@@ -2,11 +2,6 @@
 
 デモサイト:https://bookmark3.onrender.com/
 
-試用アカウント:
-
-ユーザー名: raguna
-
-パスワード: kaibasensei
 
 ### 概要
 
